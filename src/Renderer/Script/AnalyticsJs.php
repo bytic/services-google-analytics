@@ -2,7 +2,8 @@
 
 namespace ByTIC\GoogleAnalytics\Tracking\Renderer\Script;
 
-use ByTIC\GoogleAnalytics\Tracking\Data\Tracker;
+use ByTIC\GoogleAnalytics\Tracking\Renderer\Script\AnalyticsJs\CreateCommand;
+use ByTIC\GoogleAnalytics\Tracking\Renderer\Script\AnalyticsJs\SendCommand;
 
 /**
  * Class AnalyticsJs
@@ -24,7 +25,8 @@ class AnalyticsJs extends AbstractScript
         $trackers = $this->getGoogleAnalytics()->getTrackers();
 
         foreach ($trackers as $alias => $tracker) {
-            $script .= $this->generateTrackerCode($tracker, $alias);
+            $script .= CreateCommand::generate($tracker, $this->getFunctionName());
+            $script .= SendCommand::generate($tracker, $this->getFunctionName());
         }
 
         return $script;
@@ -43,48 +45,6 @@ m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
 SCRIPT;
 
         return sprintf($script, $this->getFunctionName());
-    }
-
-    /**
-     * @param Tracker $tracker
-     * @param string $alias
-     * @return string
-     */
-    protected function generateTrackerCode($tracker, $alias)
-    {
-        $parameters = [];
-        $params     = [
-            'create',
-            $tracker->getTrackingId(),
-        ];
-
-
-        if ($tracker->isAllowLinker()) {
-            $parameters['allowLinker'] = true;
-        }
-
-        if ($tracker->isAnonymizeIp()) {
-            $parameters['anonymizeIp'] = true;
-        }
-
-        if (count($parameters) > 0) {
-            $params[] = $parameters;
-        }
-
-        return $this->callGa($params);
-    }
-
-    /**
-     * @param array $params
-     * @return string
-     */
-    protected function callGa(array $params)
-    {
-        $jsArray = json_encode($params);
-        $jsArrayAsParams = substr($jsArray, 1, -1);
-        $output = sprintf("\n" . '%s(%s);', $this->getFunctionName(), $jsArrayAsParams);
-
-        return $output;
     }
 
     /**
