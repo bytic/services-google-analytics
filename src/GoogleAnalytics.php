@@ -12,5 +12,5 @@ class GoogleAnalytics
     use Traits\HasTrackerFunctions;
     use Traits\HasRenderer;
 
-    const TRACKER_DEFAULT_KEY = 'gat';
+    const TRACKER_DEFAULT_KEY = '0';
 }

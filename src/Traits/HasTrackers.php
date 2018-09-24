@@ -16,6 +16,14 @@ trait HasTrackers
     protected $trackers = [];
 
     /**
+     * @return Tracker[]
+     */
+    public function getTrackers(): array
+    {
+        return $this->trackers;
+    }
+
+    /**
      * @param $key
      * @return null
      */
@@ -30,12 +38,10 @@ trait HasTrackers
      */
     protected function autoInitTracker($key)
     {
-        if ($this->hasTracker($key)) {
-            $this->getTracker($key);
+        if (!$this->hasTracker($key)) {
+            $this->addTracker(false, $key);
         }
-        $tracker = $this->newTracker(false);
-        $this->addTracker($tracker, $key);
-        return $tracker;
+        return $this->getTracker($key);
     }
 
     /**
@@ -67,6 +73,7 @@ trait HasTrackers
     public function addTracker($tracker, $key)
     {
         $tracker = $tracker instanceof Tracker ? $tracker : $this->newTracker($tracker);
+        $tracker->setAlias($key);
         $this->trackers[$key] = $tracker;
     }
 

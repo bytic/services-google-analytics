@@ -16,9 +16,12 @@ class Tracker
      */
     protected $trackingId;
 
+    protected $alias;
+
     protected $enableTracking = true;
 
     protected $allowLinker = false;
+    protected $anonymizeIp = false;
 
     protected $domainName;
 
@@ -47,6 +50,22 @@ class Tracker
     public function setTrackingId($trackingId)
     {
         $this->trackingId = $trackingId;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getAlias()
+    {
+        return $this->alias;
+    }
+
+    /**
+     * @param mixed $alias
+     */
+    public function setAlias($alias)
+    {
+        $this->alias = $alias;
     }
 
     /**
@@ -95,5 +114,21 @@ class Tracker
     public function getDomainName()
     {
         return $this->domainName;
+    }
+
+    /**
+     * @return bool
+     */
+    public function isAnonymizeIp(): bool
+    {
+        return $this->anonymizeIp;
+    }
+
+    /**
+     * @param bool $anonymizeIp
+     */
+    public function setAnonymizeIp(bool $anonymizeIp)
+    {
+        $this->anonymizeIp = $anonymizeIp;
     }
 }
