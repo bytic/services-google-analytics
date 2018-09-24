@@ -1,10 +1,10 @@
 <?php
 
-namespace ByTIC\GoogleAnalytics\Tracking\Models;
+namespace ByTIC\GoogleAnalytics\Tracking\Data;
 
 /**
  * Class Tracker
- * @package ByTIC\GoogleAnalytics\Tracking\Models
+ * @package ByTIC\GoogleAnalytics\Tracking\Data
  */
 class Tracker
 {
