@@ -2,5 +2,8 @@
 (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
 m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
 })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
-ga("create","UA-9999999-9","auto","t0");
-ga("t0.send","pageview");
+ga("create","UA-9999999-8","auto","b");
+ga("b.require","ecommerce");
+ga("b.ecommerce:addTransaction",{"id":"999"});
+ga("b.ecommerce:addItem",{"id":"999","name":"Test Product"});
+ga("b.send","pageview");

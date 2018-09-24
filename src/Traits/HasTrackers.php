@@ -25,7 +25,7 @@ trait HasTrackers
 
     /**
      * @param $key
-     * @return null
+     * @return Tracker
      */
     public function getTracker($key)
     {

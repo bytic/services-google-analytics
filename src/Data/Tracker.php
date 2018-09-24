@@ -2,12 +2,15 @@
 
 namespace ByTIC\GoogleAnalytics\Tracking\Data;
 
+use ByTIC\GoogleAnalytics\Tracking\Data\Tracker\HasTransactionsTrait;
+
 /**
  * Class Tracker
  * @package ByTIC\GoogleAnalytics\Tracking\Data
  */
 class Tracker
 {
+    use HasTransactionsTrait;
 
     /**
      * Web property ID for Google Analytics
@@ -24,8 +27,6 @@ class Tracker
     protected $anonymizeIp = false;
 
     protected $domainName;
-
-    protected $transactions = [];
 
     /**
      * Tracker constructor.

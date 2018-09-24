@@ -3,6 +3,8 @@
 namespace ByTIC\GoogleAnalytics\Tests\Renderer\Script;
 
 use ByTIC\GoogleAnalytics\Tests\AbstractTest;
+use ByTIC\GoogleAnalytics\Tracking\Data\Ecommerce\Item;
+use ByTIC\GoogleAnalytics\Tracking\Data\Ecommerce\Transaction;
 use ByTIC\GoogleAnalytics\Tracking\Renderer\Script\AnalyticsJs;
 
 /**
@@ -41,6 +43,23 @@ class AnalyticsJsTest extends AbstractTest
 
         self::assertSame(
             file_get_contents(TEST_FIXTURE_PATH . '\codes\analytics\basicTwoTrackers.html'),
+            $script->render()
+        );
+    }
+
+    public function testGenerateWithTransaction()
+    {
+        $script = $this->initScript();
+        $script->getGoogleAnalytics()->setTrackingId('UA-9999999-8', 'b');
+
+        $transaction = Transaction::createFromArray(['id' => '999']);
+        $item = Item::createFromArray(['transactionId' => '999', 'name' => 'Test Product']);
+        $transaction->addItem($item);
+
+        $script->getGoogleAnalytics()->addTransaction($transaction, 'b');
+
+        self::assertSame(
+            file_get_contents(TEST_FIXTURE_PATH . '\codes\analytics\basicTransaction.html'),
             $script->render()
         );
     }
