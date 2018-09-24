@@ -1,0 +1,36 @@
+{
+  "name": "bytic/google-analytics",
+  "type": "library",
+  "description": "Google Analytics interaction library",
+  "keywords": [
+    "facebook",
+    "pixel"
+  ],
+  "homepage": "https://github.com/ByTIC/services-google-analytics",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Gabriel Solomon",
+      "email": "hello@gabrielsolomon.ro"
+    }
+  ],
+  "autoload": {
+    "psr-4": {
+      "ByTIC\\GoogleAnalytics\\Tracking\\": "src"
+    }
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "ByTIC\\GoogleAnalytics\\Tests\\": "tests/src",
+      "ByTIC\\GoogleAnalytics\\Tests\\Fixtures\\": "tests/fixtures"
+    }
+  },
+  "require": {
+    "php": ">=7.0.0"
+  },
+  "require-dev": {
+    "squizlabs/php_codesniffer": "^3.0",
+    "phpunit/phpunit": "^7.2",
+    "mockery/mockery": "^1.1"
+  }
+}
