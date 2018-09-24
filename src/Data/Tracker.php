@@ -16,6 +16,8 @@ class Tracker
      */
     protected $trackingId;
 
+    protected $enableTracking = true;
+
     protected $allowLinker = false;
 
     protected $domainName;
@@ -26,7 +28,7 @@ class Tracker
      * Tracker constructor.
      * @param string $trackingId
      */
-    public function __construct($trackingId)
+    public function __construct($trackingId = null)
     {
         $this->trackingId = $trackingId;
     }
@@ -45,6 +47,22 @@ class Tracker
     public function setTrackingId($trackingId)
     {
         $this->trackingId = $trackingId;
+    }
+
+    /**
+     * @return bool
+     */
+    public function isEnabled(): bool
+    {
+        return !empty($this->trackingId) && $this->enableTracking;
+    }
+
+    /**
+     * @param bool $enableTracking
+     */
+    public function setEnabled(bool $enableTracking)
+    {
+        $this->enableTracking = $enableTracking;
     }
 
     /**
