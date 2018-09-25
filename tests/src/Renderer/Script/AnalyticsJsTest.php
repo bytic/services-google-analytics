@@ -30,7 +30,7 @@ class AnalyticsJsTest extends AbstractTest
         $script->getGoogleAnalytics()->setTrackingId('UA-9999999-9');
 
         self::assertSame(
-            file_get_contents(TEST_FIXTURE_PATH . '\codes\analytics\basic.html'),
+            file_get_contents(TEST_FIXTURE_PATH . '/codes/analytics/basic.html'),
             $script->render()
         );
     }
@@ -42,7 +42,7 @@ class AnalyticsJsTest extends AbstractTest
         $script->getGoogleAnalytics()->setTrackingId('UA-9999999-8', 'b');
 
         self::assertSame(
-            file_get_contents(TEST_FIXTURE_PATH . '\codes\analytics\basicTwoTrackers.html'),
+            file_get_contents(TEST_FIXTURE_PATH . '/codes/analytics/basicTwoTrackers.html'),
             $script->render()
         );
     }
@@ -59,7 +59,7 @@ class AnalyticsJsTest extends AbstractTest
         $script->getGoogleAnalytics()->addTransaction($transaction, 'b');
 
         self::assertSame(
-            file_get_contents(TEST_FIXTURE_PATH . '\codes\analytics\basicTransaction.html'),
+            file_get_contents(TEST_FIXTURE_PATH . '/codes/analytics/basicTransaction.html'),
             $script->render()
         );
     }
