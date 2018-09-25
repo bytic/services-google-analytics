@@ -25,6 +25,16 @@ trait HasTrackerFunctions
     }
 
     /**
+     * @param $flag
+     * @param string $trackerKey ;
+     */
+    public function setAllowLinker(bool $flag, $trackerKey = GoogleAnalytics::TRACKER_DEFAULT_KEY)
+    {
+        $tracker = $this->autoInitTracker($trackerKey);
+        $tracker->setAllowLinker($flag);
+    }
+
+    /**
      * @param Transaction $transaction
      * @param string $trackerKey
      */
