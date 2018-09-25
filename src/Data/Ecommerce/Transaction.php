@@ -61,8 +61,8 @@ class Transaction
     {
         foreach ($params as $key => $param) {
             if ($key == 'items' && is_array($param)) {
-                foreach ($param as $item) {
-
+                foreach ($param as $itemData) {
+                    $this->addItemFromArray($itemData);
                 }
             } elseif (property_exists($this, $key)) {
                 $this->{$key} = $param;
