@@ -25,10 +25,15 @@ abstract class AbstractScript
             return '';
         }
 
-        return $this->generateCode();
+        return '<script type="text/javascript">' . "\n"
+            . $this->generateCode() . "\n"
+            . '</script>';
     }
 
-    protected abstract function generateCode();
+    /**
+     * @return string
+     */
+    abstract protected function generateCode();
 
     /**
      * @return GoogleAnalytics
