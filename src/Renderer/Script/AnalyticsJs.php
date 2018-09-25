@@ -6,6 +6,7 @@ use ByTIC\GoogleAnalytics\Tracking\Data\Tracker;
 use ByTIC\GoogleAnalytics\Tracking\Renderer\Script\AnalyticsJs\CreateCommand;
 use ByTIC\GoogleAnalytics\Tracking\Renderer\Script\AnalyticsJs\Ecommerce\AddItemCommand;
 use ByTIC\GoogleAnalytics\Tracking\Renderer\Script\AnalyticsJs\Ecommerce\AddTransactionCommand;
+use ByTIC\GoogleAnalytics\Tracking\Renderer\Script\AnalyticsJs\Ecommerce\SendCommand as EcommerceSendCommand;
 use ByTIC\GoogleAnalytics\Tracking\Renderer\Script\AnalyticsJs\RequireCommand;
 use ByTIC\GoogleAnalytics\Tracking\Renderer\Script\AnalyticsJs\SendCommand;
 
@@ -86,6 +87,7 @@ SCRIPT;
                 $output .= AddItemCommand::generate($tracker, $item, $this->getFunctionName());
             }
         }
+        $output .= EcommerceSendCommand::generate($tracker, $this->getFunctionName());
 
         return $output;
     }

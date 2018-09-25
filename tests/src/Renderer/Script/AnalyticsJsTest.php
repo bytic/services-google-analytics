@@ -59,7 +59,28 @@ class AnalyticsJsTest extends AbstractTest
         $script->getGoogleAnalytics()->addTransaction($transaction, 'b');
 
         self::assertSame(
-            file_get_contents(TEST_FIXTURE_PATH . '/codes/analytics/basicTransaction.html'),
+            file_get_contents(TEST_FIXTURE_PATH . '/codes/analytics/ecommerce/basicTransaction.html'),
+            $script->render()
+        );
+    }
+
+    public function testMultipleTransactionsAndTrackers()
+    {
+        $script = $this->initScript();
+        $ga = $script->getGoogleAnalytics();
+
+        $ga->setTrackingId('UA-99999-1');
+        $ga->setTrackingId('UA-99999-2', 't2');
+
+        $transaction = Transaction::createFromArray(['id' => '999']);
+        $item = Item::createFromArray(['transactionId' => '999', 'name' => 'Test Product']);
+        $transaction->addItem($item);
+
+        $ga->addTransaction($transaction);
+        $ga->addTransaction($transaction, 't2');
+
+        self::assertSame(
+            file_get_contents(TEST_FIXTURE_PATH . '/codes/analytics/ecommerce/multipleTransactionsAndTrackers.html'),
             $script->render()
         );
     }
