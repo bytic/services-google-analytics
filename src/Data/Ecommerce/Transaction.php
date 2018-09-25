@@ -60,7 +60,11 @@ class Transaction
     public function populateFromParams($params)
     {
         foreach ($params as $key => $param) {
-            if (property_exists($this, $key)) {
+            if ($key == 'items' && is_array($param)) {
+                foreach ($param as $item) {
+
+                }
+            } elseif (property_exists($this, $key)) {
                 $this->{$key} = $param;
             }
         }
@@ -171,10 +175,20 @@ class Transaction
     }
 
     /**
+     * @param array $params
+     */
+    public function addItemFromArray(array $params)
+    {
+        $item = Item::createFromArray($params);
+        $this->addItem($item);
+    }
+
+    /**
      * @param Item $item
      */
     public function addItem(Item $item)
     {
+        $item->setTransactionId($this->getId());
         $sku = $item->getSku();
         if ($sku) {
             $this->items[$sku] = $item;
