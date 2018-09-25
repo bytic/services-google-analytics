@@ -48,7 +48,7 @@ class AddItemCommand
         }
 
         $params = [
-            $tracker->getAlias() . '.ecommerce:addItem',
+            $tracker->getCommandAlias() . 'ecommerce:addItem',
             $itemParams,
         ];
 

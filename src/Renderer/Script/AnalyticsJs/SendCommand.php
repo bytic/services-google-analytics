@@ -20,7 +20,7 @@ class SendCommand
     {
         $parameters = [];
         $params = [
-            $tracker->getAlias() . '.send',
+            $tracker->getCommandAlias() . 'send',
             'pageview',
         ];
 

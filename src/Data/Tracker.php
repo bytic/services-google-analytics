@@ -62,6 +62,14 @@ class Tracker
     }
 
     /**
+     * @return mixed
+     */
+    public function getCommandAlias()
+    {
+        return empty($this->alias) ? '' : $this->alias . '.';
+    }
+
+    /**
      * @param mixed $alias
      */
     public function setAlias($alias)

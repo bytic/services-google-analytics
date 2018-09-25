@@ -23,7 +23,7 @@ class RequireCommand
         $functionName = AnalyticsJs::DEFAULT_FUNCTION_NAME
     ) {
         $params = [
-            $tracker->getAlias() . '.require',
+            $tracker->getCommandAlias() . 'require',
             $pluginName,
         ];
 

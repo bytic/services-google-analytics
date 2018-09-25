@@ -34,6 +34,11 @@ class Transaction
     protected $tax;
 
     /**
+     * @var  string The local currency must be specified in the ISO 4217 standard.
+     */
+    protected $currency;
+
+    /**
      * @var Item[]
      */
     protected $items = [];
@@ -64,7 +69,7 @@ class Transaction
     /**
      * @return string
      */
-    public function getId(): string
+    public function getId()
     {
         return $this->id;
     }
@@ -139,6 +144,22 @@ class Transaction
     public function setTax(float $tax)
     {
         $this->tax = $tax;
+    }
+
+    /**
+     * @return string
+     */
+    public function getCurrency()
+    {
+        return $this->currency;
+    }
+
+    /**
+     * @param string $currency
+     */
+    public function setCurrency(string $currency)
+    {
+        $this->currency = $currency;
     }
 
     /**

@@ -6,6 +6,7 @@ use ByTIC\GoogleAnalytics\Tracking\Data\Ecommerce\Transaction;
 use ByTIC\GoogleAnalytics\Tracking\Data\Tracker;
 use ByTIC\GoogleAnalytics\Tracking\Renderer\Script\AnalyticsJs;
 use ByTIC\GoogleAnalytics\Tracking\Renderer\Script\AnalyticsJs\MethodCall;
+use InvalidArgumentException;
 
 /**
  * Class AddTransactionCommand
@@ -22,35 +23,55 @@ class AddTransactionCommand
      */
     public static function generate($tracker, $transaction, $functionName = AnalyticsJs::DEFAULT_FUNCTION_NAME)
     {
+        $transactionId = $transaction->getId();
+        if (empty($transactionId)) {
+            throw new InvalidArgumentException(
+                sprintf(
+                    'Cannot add transaction without id'
+                )
+            );
+        }
         $transactionParams = [
             'id' => $transaction->getId(),
         ];
 
-        $affiliation = $transaction->getAffiliation();
-        if ($affiliation !== null) {
-            $transactionParams['affiliation'] = $affiliation;
-        }
-
-        $revenue = $transaction->getRevenue();
-        if ($revenue !== null) {
-            $transactionParams['revenue'] = $revenue;
-        }
-
-        $shipping = $transaction->getShipping();
-        if ($shipping !== null) {
-            $transactionParams['shipping'] = $shipping;
-        }
-
-        $tax = $transaction->getTax();
-        if ($tax !== null) {
-            $transactionParams['tax'] = $tax;
-        }
+        $transactionParams = static::checkOptionalParams($transaction, $transactionParams);
 
         $params = [
-            $tracker->getAlias() . '.ecommerce:addTransaction',
+            $tracker->getCommandAlias() . 'ecommerce:addTransaction',
             $transactionParams,
         ];
 
         return MethodCall::generate($params, $functionName);
+    }
+
+    /**
+     * @param $transaction
+     * @param array $params
+     * @return array|mixed
+     */
+    protected static function checkOptionalParams($transaction, $params = [])
+    {
+        $paramsLabels = ['affiliation', 'revenue', 'shipping', 'tax', 'currency'];
+        foreach ($paramsLabels as $paramName) {
+            $params = static::addParam($transaction, $paramName, $params);
+        }
+        return $params;
+    }
+
+    /**
+     * @param $transaction
+     * @param $paramName
+     * @param $params
+     * @return mixed
+     */
+    protected static function addParam($transaction, $paramName, $params = [])
+    {
+        $functionName = 'get' . ucfirst($paramName);
+        $value = $transaction->$functionName();
+        if ($value !== null) {
+            $params[$paramName] = $value;
+        }
+        return $params;
     }
 }
