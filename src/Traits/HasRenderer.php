@@ -1,9 +1,10 @@
 <?php
+declare(strict_types=1);
 
 namespace ByTIC\GoogleAnalytics\Tracking\Traits;
 
 use ByTIC\GoogleAnalytics\Tracking\Renderer\Renderer;
-use ByTIC\GoogleAnalytics\Tracking\Renderer\Script\AnalyticsJs;
+use ByTIC\GoogleAnalytics\Tracking\Renderer\Script\AnalyticsFour;
 
 /**
  * Trait HasRenderer
@@ -12,6 +13,15 @@ use ByTIC\GoogleAnalytics\Tracking\Renderer\Script\AnalyticsJs;
 trait HasRenderer
 {
     protected $script = Renderer::DEFAULT_RENDERER;
+
+    /**
+     * @param $script
+     * @return void
+     */
+    public function setRenderer($script)
+    {
+        $this->script = $script;
+    }
 
     /**
      * @return string

@@ -1,9 +1,10 @@
 <?php
+declare(strict_types=1);
 
 namespace ByTIC\GoogleAnalytics\Tracking\Renderer;
 
 use ByTIC\GoogleAnalytics\Tracking\GoogleAnalytics;
-use ByTIC\GoogleAnalytics\Tracking\Renderer\Script\AnalyticsJs;
+use ByTIC\GoogleAnalytics\Tracking\Renderer\Script\AnalyticsFour;
 use ByTIC\GoogleAnalytics\Tracking\Renderer\Script\AbstractScript;
 use ByTIC\GoogleAnalytics\Tracking\Traits\HasRenderer;
 
@@ -14,6 +15,7 @@ use ByTIC\GoogleAnalytics\Tracking\Traits\HasRenderer;
 class Renderer
 {
     const DEFAULT_RENDERER = 'AnalyticsJs';
+    const GA4_RENDERER = 'Ga4';
 
     /**
      * @param GoogleAnalytics|HasRenderer $analytics
