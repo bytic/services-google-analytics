@@ -3,8 +3,7 @@
   "type": "library",
   "description": "Google Analytics interaction library",
   "keywords": [
-    "facebook",
-    "pixel"
+    "google analytics"
   ],
   "homepage": "https://github.com/ByTIC/services-google-analytics",
   "license": "MIT",
