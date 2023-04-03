@@ -13,7 +13,7 @@ use ByTIC\GoogleAnalytics\Tracking\Renderer\Script\AnalyticsJs\RequireCommand;
 use ByTIC\GoogleAnalytics\Tracking\Renderer\Script\AnalyticsJs\SendCommand;
 
 /**
- * Class AnalyticsJs
+ * Class AnalyticsFour
  * @package ByTIC\GoogleAnalytics\Tracking
  */
 class AnalyticsFour extends AbstractScript
@@ -54,7 +54,12 @@ SCRIPT;
      */
     protected function generateLoadScript()
     {
-        return '<script async src="https://www.googletagmanager.com/gtag/js?id=G-XT6R37X62E"></script>';
+        $return = '';
+        $trackers = $this->getGoogleAnalytics()->getTrackers();
+        foreach ($trackers as $alias => $tracker) {
+            $return .= '<script async src="https://www.googletagmanager.com/gtag/js?id=' . $tracker->getTrackingId() . '"></script>' . "\n";
+        }
+        return $return;
     }
 
     /**

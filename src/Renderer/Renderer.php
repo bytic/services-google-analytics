@@ -15,7 +15,7 @@ use ByTIC\GoogleAnalytics\Tracking\Traits\HasRenderer;
 class Renderer
 {
     const DEFAULT_RENDERER = 'AnalyticsJs';
-    const GA4_RENDERER = 'Ga4';
+    const GA4_RENDERER = 'AnalyticsFour';
 
     /**
      * @param GoogleAnalytics|HasRenderer $analytics
