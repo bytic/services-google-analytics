@@ -20,6 +20,9 @@ trait HasTrackerFunctions
      */
     public function setTrackingId($id, $trackerKey = GoogleAnalytics::TRACKER_DEFAULT_KEY)
     {
+        if (empty($id)) {
+            return;
+        }
         $tracker = $this->autoInitTracker($trackerKey);
         $tracker->setTrackingId($id);
     }
